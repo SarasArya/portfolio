@@ -16,6 +16,6 @@ app.get('/blog.html', function(req, res,next){
 app.post('/contact', function(req, res, next){
 
 });
-server.listen('8000', function() {
-    console.log("App is running on port 8000");
+server.listen(process.env.PORT || 8000, function() {
+    console.log("App is running on port"+process.env.PORT||8000);
 });
