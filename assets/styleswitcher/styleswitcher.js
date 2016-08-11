@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	$("body").append('<div id="style-switcher"></div>');
-	$("#style-switcher").load( "assets/styleswitcher/styleswitcher.html" );
+	// $("#style-switcher").load( "assets/styleswitcher/styleswitcher.html" );
 
 	setTimeout(function() {
 
