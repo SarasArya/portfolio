@@ -1,19 +1,11 @@
 let express = require('express'),
     path = require('path'),
-     bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    helper = require('sendgrid').mail;
 let app = express();
+let sendgridAPIKey = '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';
 let server = require('http').Server(app);
-let nodemailer = require('nodemailer');
-let transporter = nodemailer.createTransport({
-	host : 'smtp.gmail.com',
-	port : 465,
-	auth : {
-		user : "saras.arya@gmail.com",
-		pass : "9987989650"
-	},
-	logger : true,
-	secure : true
-});
+
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -32,21 +24,24 @@ app.get('/blog.html', function(req, res, next) {
 });
 
 app.post('/contact', function(req, res, next) {
-    var mailOptions = {
-    from: '"Saras Arya 👥" <saras.arya@gmail.com>', // sender address
-    to: 'saras.arya@gmail.com', // list of receivers
-    subject: 'Light it up ✔', // Subject line
-    text: `Message ${req.body.message}`, // plaintext body
-    html: `Message ${req.body.message}` // html body
-};
-transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        return console.log(error);
-    }
-    console.log('Message sent: ' + info.response);
-    res.sendStatus(200);
-});
-    
+    from_email = new helper.Email(req.body.email);
+    to_email = new helper.Email("saras.arya@gmail.com");
+    subject = "Light it up boys";
+    content = new helper.Content("text/plain", req.body.message);
+    mail = new helper.Mail(from_email, subject, to_email, content);
+
+    var sg = require('sendgrid')(sendgridAPIKey);
+    var requesBody = mail.toJSON();
+    var request = sg.emptyRequest();
+    request.method = 'POST';
+    request.path = '/v3/mail/send';
+    request.body = requesBody;
+    sg.API(request, function(error, response) {
+        console.log(response.statusCode);
+        if (response.statusCode >= 200 && response.statusCode <= 299)
+            res.sendStatus(200);
+        console.log(response.body);
+    });
 });
 
 app.get('/download', function(req, res, next) {
