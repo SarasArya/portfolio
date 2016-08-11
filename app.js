@@ -32,14 +32,12 @@ app.get('/blog.html', function(req, res, next) {
 });
 
 app.post('/contact', function(req, res, next) {
-    console.log(req.body);
-    console.log(`name ${req.body.name}`);
     var mailOptions = {
     from: '"Saras Arya 👥" <saras.arya@gmail.com>', // sender address
     to: 'saras.arya@gmail.com', // list of receivers
     subject: 'Light it up ✔', // Subject line
     text: `Message ${req.body.message}`, // plaintext body
-    html: `<b>Message ${req.body.message} </b>` // html body
+    html: `Message ${req.body.message}` // html body
 };
 transporter.sendMail(mailOptions, function(error, info){
     if(error){
