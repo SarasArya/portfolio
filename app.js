@@ -24,10 +24,10 @@ app.get('/blog.html', function(req, res, next) {
 });
 
 app.post('/contact', function(req, res, next) {
-    from_email = new helper.Email(req.body.email);
+    from_email = new helper.Email('saras.arya@gmail.com');
     to_email = new helper.Email("saras.arya@gmail.com");
-    subject = "Light it up boys";
-    content = new helper.Content("text/plain", req.body.message);
+    subject = "You have a new message from your website";
+    content = new helper.Content("text/plain", `Somebody with name ${req.body.name} tried to contact you from $req.body.email} with the message ${req.body.message}`);
     mail = new helper.Mail(from_email, subject, to_email, content);
 
     var sg = require('sendgrid')(sendgridAPIKey);
