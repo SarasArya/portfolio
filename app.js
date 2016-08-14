@@ -15,7 +15,7 @@ app.get('/blog.html', function(req, res,next){
 
 app.post('/contact', function(req, res, next){
 
-});
+}); 
 var port = process.env.PORT || 8000;
 server.listen(port, function() {
     console.log("App is running on port "+ port);
