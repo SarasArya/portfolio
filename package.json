@@ -17,6 +17,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "rss-to-json": "^1.0.4",
     "sendgrid": "^4.0.1"
   }
 }
