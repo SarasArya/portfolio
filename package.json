@@ -6,7 +6,7 @@
     "npm": "3.10.3"
   },
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "cors": "^2.8.4",
     "express": "^4.14.0",
     "rss-to-json": "^1.0.4",
     "sendgrid": "^4.0.1"

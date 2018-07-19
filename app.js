@@ -3,12 +3,24 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   helper = require("sendgrid").mail;
 const app = express();
+const cors = require("cors");
 const Feed = require("rss-to-json");
+
+const whitelist = ["https://www.sarasarya.com", "http://localhost:8000"];
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+};
 
 let sendgridAPIKey =
   "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";
 let server = require("http").Server(app);
-
+app.use;
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.json());
 app.use(
@@ -26,11 +38,7 @@ app.get("/", function(req, res, next) {
   res.sendStatus(200);
 });
 
-app.get("/blog.html", function(req, res, next) {
-  res.sendFile(path.join(__dirname + "/blog.html"));
-});
-
-app.post("/contact", function(req, res, next) {
+app.post("/contact", cors(corsOptions), function(req, res, next) {
   from_email = new helper.Email("saras.arya@gmail.com");
   to_email = new helper.Email("saras.arya@gmail.com");
   subject = "You have a new message from your website";
