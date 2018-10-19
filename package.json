@@ -17,7 +17,9 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "cors": "^2.8.4",
+    "eslint": "^5.7.0",
     "express": "^4.14.0",
+    "prettier": "^1.14.3",
     "rss-to-json": "^1.0.4",
     "sendgrid": "^4.0.1"
   }
